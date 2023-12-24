@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: real_world_blog_db
+    restart: always
+    ports:
+      - '5432:5432'
+    env_file:
+      - db.env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - real_world_blog_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    container_name: real_world_blog_pgadmin
+    restart: always
+    ports:
+      - '8888:80'
+    env_file:
+      - db.env
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - real_world_blog_network
+
+volumes:
+  db_data:
+  pgadmin_data:
+    driver: local
+
+networks:
+  real_world_blog_network:
+    driver: bridge
