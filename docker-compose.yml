@@ -8,7 +8,7 @@ services:
     ports:
       - '5432:5432'
     env_file:
-      - db.env
+      - ./clone/db.env
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./schema.sql:/docker-entrypoint-initdb.d/init.sql
@@ -24,7 +24,7 @@ services:
     ports:
       - '8888:80'
     env_file:
-      - db.env
+      - ./clone/db.env
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     networks:
