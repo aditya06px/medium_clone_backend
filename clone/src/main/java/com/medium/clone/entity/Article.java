@@ -14,18 +14,14 @@ public class Article {
     @Column(name = "title", nullable = false, length = 250)
     private String title;
 
-    @Column(name = "slug", nullable = false)
-    private String slug;
 
     @Column(name = "description", length = 500)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    private User author;
-
     @Column(name = "body", columnDefinition = "text")
     private String body;
+    @Column(name = "slug", nullable = false)
+    private String slug;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

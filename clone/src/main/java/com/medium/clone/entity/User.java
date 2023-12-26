@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @Getter
 @Setter
 @ToString
@@ -13,9 +14,9 @@ import lombok.ToString;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(name = "username", nullable = false, unique = true, length = 100)
+    @Column(name = "username", nullable = false, unique = true, length = 150)
     private String username;
 
     @Column(name = "email", nullable = false, unique = true, length = 250)
@@ -25,7 +26,7 @@ public class User {
     private String password;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "bio")
     private String bio;
