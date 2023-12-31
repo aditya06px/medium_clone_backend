@@ -1,9 +1,9 @@
 package com.medium.clone.repository;
 
-import com.medium.clone.entity.Article;
+import com.medium.clone.entity.UserArticleMapping;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArticleRepository extends JpaRepository<Article, Long> {
+public interface UserArticleMappingRepositoy extends JpaRepository<UserArticleMapping, Long> {
 }

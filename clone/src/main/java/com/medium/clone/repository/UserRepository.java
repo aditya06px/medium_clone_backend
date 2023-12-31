@@ -1,13 +1,14 @@
 package com.medium.clone.repository;
 
-import com.medium.clone.entity.User;
-import com.medium.clone.requestDto.UserDto;
+import com.medium.clone.entity.UserEntity;
+import com.medium.clone.requestDto.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<Long, User> {
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
+
+    User save(User user);
 
 
-    User save(UserDto user);
-//    User hello mf
-    User create(UserDto user1);
 }
