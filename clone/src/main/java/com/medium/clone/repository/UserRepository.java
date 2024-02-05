@@ -1,14 +1,20 @@
 package com.medium.clone.repository;
 
 import com.medium.clone.entity.UserEntity;
-import com.medium.clone.requestDto.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
-    User save(User user);
+    UserEntity save(UserEntity user);
 
+    boolean existsByUsernameOrEmail(String username, String email);
+    Optional<UserEntity> findByEmail(String email);
 
+    Optional<UserEntity> findByUserId(Integer userId);
+
+    Optional<UserEntity> findByUsername(String username);
 }

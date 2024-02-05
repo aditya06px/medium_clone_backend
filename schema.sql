@@ -1,5 +1,5 @@
 -- create a database owner is postgres -----------------------------------------
-CREATE DATABASE "read_world"
+CREATE DATABASE "real_world"
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'

@@ -6,11 +6,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "user_table")
+@Table(name = "user", schema = "public")
 public class UserEntity {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @Column(name = "username", nullable = false, unique = true, length = 150)
     private String username;
