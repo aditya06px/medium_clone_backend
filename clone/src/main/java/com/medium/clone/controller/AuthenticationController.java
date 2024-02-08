@@ -9,8 +9,10 @@ import com.medium.clone.responseDto.UserResponseDto;
 import com.medium.clone.security.JWTGenerator;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +29,10 @@ public class AuthenticationController {
 
     private final UserRepository userRepo;
     private final ModelMapper modelMapper;
-    private final AuthenticationManager authenticationManager;
+//    private final AuthenticationManager authenticationManager;
+
+    private final AuthenticationManager providerManager;
+
     private final PasswordEncoder passwordEncoder;
     private final JWTGenerator jwtGenerator;
 
@@ -61,9 +66,17 @@ public class AuthenticationController {
     public ApiResponse<?> loginUser(@RequestBody UserRequest user) throws ResourceNotFoundException {
 
         // you can write your own authentication manager by implementing AuthenticationManager
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
+        // 1. usually UsernamePasswordAuthenticationFilter calls AuthenticationManager's authenticate method
+        // 2. but here /login is permittedAll so we need to explicitly call AuthenticationManager's authenticate method
+        // 3. or You can write any logic of getting password from db and comparing two passwords
+
+//        Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+
+
+               Authentication authentication = providerManager.authenticate(
+               new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 
         System.out.println("storing authentication object in contextHolder");
         // SecurityContextHolder is a class in Spring Security that provides access
